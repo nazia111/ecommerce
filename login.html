@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FoodMart - Online Grocery Store</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #ebeae8, #fbe9e7);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  padding: 2rem;
+}
+
+/*.image-section img {
+
+   width: 100px;         
+  height: 100px;
+  border-radius: 50%;   
+  object-fit: cover;    
+  border: 2px solid #ccc;
+} */
+
+.form-section {
+  padding-left: 200px;
+  max-width: 400px;
+  height: 420px;
+}
+ .icon-img {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+} 
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 40px 12px 15px;
+  border: 1px solid #aaa;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.input-group span {
+  position: absolute;
+  right: 1px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.forgot {
+  text-align: left;
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #918f8c;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  
+}
+
+.login-btn:hover {
+  background-color: #f1f0ee;
+}
+
+  </style> 
+</head>
+<body>
+
+  <div class="container">
+      <div class="image-section">
+ <img src="images/logo.png" alt="logo" class="img-fluid">
+    </div>
+   
+    <div class="form-section">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="input-group">
+         
+        <input type="text" id="loginuser" placeholder="Enter your username" required /> </div>
+        <div class="input-group">
+          
+          <input type="password" id="loginpassword" placeholder="Enter password" required />
+          <span id="togglePassword">👁️</span>
+        </div>
+        <p class="forgot"><a href="#" style="text-decoration: none;">Forgot Password?</a></p>
+        <br>
+        <button type="submit" class="login-btn"><a href="index.html" style="text-decoration:none">Login</a></button>
+      </form>
+    </div>
+  </div>
+  <script>
+         const passviewbtn = document.getElementById("togglePassword");
+        const viewpassword = document.getElementById("loginpassword");
+
+         document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const username = document.getElementById("loginuser").value;
+        const password = document.getElementById("loginpassword").value;
+         const logincred = [
+            {user: "admin" , pass:"admin123"},]
+
+            
+            if(logincred.find(cred => username === cred.user && password === cred.pass)){
+                window.location.href = "pay.html";
+                localStorage.setItem('activeuser', username);
+                localStorage.setItem('sessionstatus','login')
+                document.getElementById("loginuser").value = "";
+                document.getElementById("loginpassword").value = "";
+                
+            }else{
+                alert("Invalid username or password");
+                document.getElementById("loginuser").value = "";
+                document.getElementById("loginpassword").value = "";
+            }
+
+
+            
+    });
+
+              passviewbtn.addEventListener('click',()=>{
+                 passviewbtn.classList.toggle("unhide");
+                 
+                 if(passviewbtn.classList.contains('unhide')){
+                    viewpassword.type = "text";
+                 }else{
+                    viewpassword.type = "password";
+                 }
+            });
+  </script>
+</body>
+</html>
